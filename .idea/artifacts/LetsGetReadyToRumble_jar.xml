@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LetsGetReadyToRumble:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LetsGetReadyToRumble_jar</output-path>
+    <root id="archive" name="LetsGetReadyToRumble.jar">
+      <element id="module-output" name="LetsGetReadyToRumble" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.7/gson-2.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/jssc.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

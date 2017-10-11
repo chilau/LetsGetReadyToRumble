@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_letsgetreadytorumble" default="compile.module.letsgetreadytorumble">
+  <dirname property="module.letsgetreadytorumble.basedir" file="${ant.file.module_letsgetreadytorumble}"/>
+  
+  <property name="module.jdk.home.letsgetreadytorumble" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.letsgetreadytorumble" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.letsgetreadytorumble" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.letsgetreadytorumble" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="letsgetreadytorumble.output.dir" value="${module.letsgetreadytorumble.basedir}/out/production/LetsGetReadyToRumble"/>
+  <property name="letsgetreadytorumble.testoutput.dir" value="${module.letsgetreadytorumble.basedir}/out/test/LetsGetReadyToRumble"/>
+  
+  <path id="letsgetreadytorumble.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="letsgetreadytorumble.module.production.classpath">
+    <path refid="${module.jdk.classpath.letsgetreadytorumble}"/>
+    <path refid="library.jssc.classpath"/>
+    <path refid="library.com.google.code.gson:gson:2.7.classpath"/>
+  </path>
+  
+  <path id="letsgetreadytorumble.runtime.production.module.classpath">
+    <pathelement location="${letsgetreadytorumble.output.dir}"/>
+    <path refid="library.jssc.classpath"/>
+    <path refid="library.com.google.code.gson:gson:2.7.classpath"/>
+  </path>
+  
+  <path id="letsgetreadytorumble.module.classpath">
+    <path refid="${module.jdk.classpath.letsgetreadytorumble}"/>
+    <pathelement location="${letsgetreadytorumble.output.dir}"/>
+    <path refid="library.jssc.classpath"/>
+    <path refid="library.com.google.code.gson:gson:2.7.classpath"/>
+  </path>
+  
+  <path id="letsgetreadytorumble.runtime.module.classpath">
+    <pathelement location="${letsgetreadytorumble.testoutput.dir}"/>
+    <pathelement location="${letsgetreadytorumble.output.dir}"/>
+    <path refid="library.jssc.classpath"/>
+    <path refid="library.com.google.code.gson:gson:2.7.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.letsgetreadytorumble">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.letsgetreadytorumble">
+    <patternset refid="excluded.from.module.letsgetreadytorumble"/>
+  </patternset>
+  
+  <path id="letsgetreadytorumble.module.sourcepath">
+    <dirset dir="${module.letsgetreadytorumble.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.letsgetreadytorumble" depends="compile.module.letsgetreadytorumble.production,compile.module.letsgetreadytorumble.tests" description="Compile module LetsGetReadyToRumble"/>
+  
+  <target name="compile.module.letsgetreadytorumble.production" depends="register.custom.compilers" description="Compile module LetsGetReadyToRumble; production classes">
+    <mkdir dir="${letsgetreadytorumble.output.dir}"/>
+    <javac2 destdir="${letsgetreadytorumble.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.letsgetreadytorumble}/javac">
+      <compilerarg line="${compiler.args.letsgetreadytorumble}"/>
+      <bootclasspath refid="letsgetreadytorumble.module.bootclasspath"/>
+      <classpath refid="letsgetreadytorumble.module.production.classpath"/>
+      <src refid="letsgetreadytorumble.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.letsgetreadytorumble"/>
+    </javac2>
+    
+    <copy todir="${letsgetreadytorumble.output.dir}">
+      <fileset dir="${module.letsgetreadytorumble.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.letsgetreadytorumble.tests" depends="register.custom.compilers,compile.module.letsgetreadytorumble.production" description="compile module LetsGetReadyToRumble; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.letsgetreadytorumble" description="cleanup module">
+    <delete dir="${letsgetreadytorumble.output.dir}"/>
+    <delete dir="${letsgetreadytorumble.testoutput.dir}"/>
+  </target>
+</project>
